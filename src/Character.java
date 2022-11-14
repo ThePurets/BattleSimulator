@@ -1,3 +1,5 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public abstract class Character {
 
     private String id;
@@ -5,8 +7,13 @@ public abstract class Character {
     private int hp;
     private boolean isAlive = true;
 
+
+
+    //private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
+    //String.valueOf(ID_GENERATOR.getAndIncrement()) En el constructor
+
     public Character(String id, String name, int hp, boolean isAlive) {
-        this.id = id;
+        setId(id);
         this.name = name;
         this.hp = hp;
         this.isAlive = isAlive;
@@ -45,6 +52,7 @@ public abstract class Character {
         this.hp = hp;
     }
 
+
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
@@ -58,4 +66,6 @@ public abstract class Character {
                 ", isAlive=" + isAlive +
                 '}';
     }
+
+
 }
