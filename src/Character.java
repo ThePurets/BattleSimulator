@@ -6,7 +6,7 @@ public abstract class Character {
     private boolean isAlive = true;
 
     public Character(String id, String name, int hp, boolean isAlive) {
-        this.id = id;
+        this.id = RandomString.randomString();
         this.name = name;
         this.hp = hp;
         this.isAlive = isAlive;
@@ -49,7 +49,7 @@ public abstract class Character {
         isAlive = alive;
     }
 
-    @Override
+   @Override
     public String toString() {
         return "Character{" +
                 "id='" + id + '\'' +
