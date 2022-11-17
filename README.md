@@ -125,13 +125,13 @@ If a wizard does not have the mana to cast a Staff hit he will not inflict any d
 ***
 ### Authors:
 
-<a href="https://github.com/RobertoVetere">Roberto Vetere</a>
+<a href="https://github.com/RobertoVetere" target="_blank">Roberto Vetere</a>
 
-<a href="https://github.com/RoseB98">Rosi Blanco</a>
+<a href="https://github.com/RoseB98" target="_blank">Rosi Blanco</a>
 
-<a href="https://github.com/rubendelar">Rubén del Olmo</a>
+<a href="https://github.com/rubendelar" target="_blank">Rubén del Olmo</a>
 
-<a href="https://github.com/AlfonsoBarguno">Alfonso Barguñó</a>
+<a href="https://github.com/AlfonsoBarguno" target="_blank">Alfonso Barguñó</a>
 
 
 
