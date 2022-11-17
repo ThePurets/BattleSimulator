@@ -1,3 +1,4 @@
+
 import java.util.Random;
 
 public class Wizard extends Character implements Attacker{
@@ -6,65 +7,50 @@ public class Wizard extends Character implements Attacker{
     private int intelligence;
 
 
-    public Wizard(String id, String name, int hp, boolean isAlive, int mana, int intelligence) {
-        super(id, name, hp, isAlive);
-        setName(name);
-        setId(id);
+    public Wizard(int hp, int mana, int intelligence) {
+        super ( hp );
+        setName(generateRandomName());
         setHp(hp);
         setMana(mana);
         setIntelligence(intelligence);
-
+        //setAlive(true);
     }
 
-    @Override
-    public void setId(String id) {
-        int idCounter = (int)(Math.random()*1000+1000);
-        super.setId(Integer.toString(idCounter));
+    public Wizard() {
+        super(RandomClass.randomNumber(50,100));
+        this.mana = RandomClass.randomNumber(10,50);
+        setName(generateRandomName());
+        this.intelligence = RandomClass.randomNumber(1,50);
     }
 
-    @Override
-    public void setHp(int hp) {
-        int wizardHp = ((int)(Math.random()*50+50));
-        super.setHp(wizardHp);
-    }
 
-    @Override
-    public void setName(String name) {
-        String wizardName = "";
-        //String wizard = "Wizard";
-        String[] nameArray = { "Belassha", "Derius", "Albael", "Harrho", "Sirchres","Ellkra","Bridark"};
-        for (int i = 0; i < nameArray.length; i++) {
-            nameArray[i] = nameArray[(int) (Math.random() * (nameArray.length - 1))];
-            wizardName = nameArray[i];
-        }
-        //super.setName(wizard + " " + wizardName);
-        super.setName(wizardName);
-    }
-    
-
-
-    public Wizard(String name, int hp, int mana, int intelligence) {
-        super(name, hp);
-        this.mana = mana;
-        this.intelligence = intelligence;
-    }
 
     @Override
     public void attack(Character character) {
         int fireball = intelligence;
         int staffHit = 2;
 
-        int[] attackArr={fireball,staffHit};
-        Random r=new Random();
-        int randomNumber=r.nextInt(attackArr.length);
+        int[] attackArr = {fireball, staffHit};
+        Random r = new Random();
+        int randomNumber = r.nextInt(attackArr.length);
 
-        if (attackArr[randomNumber]==fireball){
-            setMana(getMana()-5);
-        }else{
-            setMana(getMana()-5);
+        if (getMana() < 5)
+            character.setHp(character.getHp() - staffHit);
+
+        if (attackArr[randomNumber] == fireball) {
+            setMana(getMana() - 5);
+            character.setHp(character.getHp() - fireball);
+
+        } else {
+            if (mana > 0) {
+                setMana(getMana() + 1);
+                character.setHp(character.getHp() - staffHit);
+            } else {
+                setMana(getMana() + 2);
+            }
         }
-        character.setHp(character.getHp()-attackArr[randomNumber]);
     }
+
 
 
     public int fireball(){
@@ -77,7 +63,7 @@ public class Wizard extends Character implements Attacker{
     }
 
     public void setMana(int mana) {
-        this.mana = (int)(Math.random()*50+5);
+        this.mana = mana;
     }
 
     public int getIntelligence() {
@@ -85,7 +71,24 @@ public class Wizard extends Character implements Attacker{
     }
 
     public void setIntelligence(int intelligence) {
-        this.intelligence = (int)(Math.random()*50+1);
+        this.intelligence = intelligence;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Wizard{" +
+                "mana=" + mana +
+                ", intelligence=" + intelligence +
+                '}';
+    }
+
+    public String generateRandomName(){
+        String warriorName;
+        String wizardIs = "Wizard ";
+        String[] nameArray = { "Belassha", "Derius", "Albael", "Harrho", "Sirchres","Ellkra","Bridark"};
+        warriorName = nameArray[(int) (Math.random() * (nameArray.length - 1))];
+        return wizardIs + warriorName;
     }
 
     @Override
@@ -97,5 +100,7 @@ public class Wizard extends Character implements Attacker{
         }
     }
 }
+
+
 
 

@@ -6,38 +6,19 @@ public class Warrior extends Character implements Attacker {
     private int strength;
 
 
-    public Warrior(String id, String name, int hp, boolean isAlive, int stamina, int strength) {
-        super(id, name, hp, isAlive);
-        setId(id);
+    public Warrior( int hp, int stamina, int strength) {
+        super( hp );
         setHp(hp);
-        setName(name);
+        setName(generateRandomName());
         setStamina(stamina);
         setStrength(strength);
-        setAlive(isAlive);
     }
 
-    public Warrior(String name, int hp, int stamina, int strength) {
-        super(name, hp);
-        this.stamina = stamina;
-        this.strength = strength;
-    }
-
-    @Override
-    public void setId(String id) {
-        int idCounter = (int)(Math.random()*1000+1000);
-        super.setId(Integer.toString(idCounter));
-    }
-
-    @Override
-    public void setName(String name) {
-        String warriorName = "";
-        String warrior = "Warrior";
-        String[] nameArray = { "Etorn", "Deadhallow", "Dragonshield", "Red Fury", "Frost Bow","Single Sworn","Zaras"};
-        for (int i = 0; i < nameArray.length; i++) {
-            nameArray[i] = nameArray[(int) (Math.random() * (nameArray.length - 1))];
-            warriorName = nameArray[i];
-        }
-        super.setName(warrior + " " + warriorName);
+    public Warrior( ) {
+        super( RandomClass.randomNumber(100,200));
+        setStamina(RandomClass.randomNumber(10,50));
+        setStrength(RandomClass.randomNumber(1,10));
+        setName(generateRandomName());
     }
 
     @Override
@@ -49,12 +30,21 @@ public class Warrior extends Character implements Attacker {
         Random r=new Random();
         int randomNumber=r.nextInt(attackArr.length);
 
+        if (getStamina() < 5)
+            character.setHp(character.getHp()-weakAttack);
+
         if (attackArr[randomNumber]== heavyAttack){
             setStamina(getStamina()-5);
+            character.setHp(character.getHp()-heavyAttack);
+
         }else{
-            setStamina(getStamina()+1);
+            if (stamina > 0){
+                setStamina(getStamina()+1);
+                character.setHp(character.getHp()-weakAttack);
+            } else{
+                setStamina(getStamina()+2);
+            }
         }
-        character.setHp(character.getHp()-attackArr[randomNumber]);
     }
 
     public int getStamina() {
@@ -68,7 +58,7 @@ public class Warrior extends Character implements Attacker {
     }
 
     public void setStamina(int stamina) {
-        this.stamina = (int)(Math.random()*50+5);
+            this.stamina = stamina;
     }
 
     public int getStrength() {
@@ -76,9 +66,8 @@ public class Warrior extends Character implements Attacker {
     }
 
     public void setStrength(int strength) {
-        this.strength =(int)(Math.random()*10+1);
+        this.strength = strength;
     }
-
 
     @Override
     public boolean isAlive() {
@@ -88,5 +77,21 @@ public class Warrior extends Character implements Attacker {
             return false;
         }
     }
+    @Override
+    public String toString() {
+        return super.toString() +
+                "stamina=" + stamina +
+                ", strength=" + strength +
+                '}';
+    }
+
+    public String generateRandomName(){
+        String warriorName;
+        String isWarrior = "Warrior ";
+        String[] nameArray = { "Etorn", "Deadhallow", "Dragonshield", "Red Fury", "Frost Bow","Single Sworn","Zaras"};
+        warriorName = nameArray[(int) (Math.random() * (nameArray.length - 1))];
+        return isWarrior + warriorName;
+    }
+
 }
 
